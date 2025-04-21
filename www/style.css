@@ -1,0 +1,144 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  background-color: black;
+}
+
+.cube {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform-style: preserve-3d;
+    transform-origin: center center;
+    width: 150px;
+    height: 150px;
+  }
+
+.face {
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    background: rgba(0, 255, 255, 0.05);
+    border: 2px solid #0ff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.face::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    box-shadow:
+        inset 0 0 20px #0ff,
+        0 0 30px #0ff;
+    pointer-events: none;
+    mix-blend-mode: screen;
+    opacity: 1;
+}
+
+
+.front  { transform: translateZ(75px);}
+.back   { transform: rotateY(180deg) translateZ(75px); }
+.left   { transform: rotateY(-90deg) translateZ(75px); }
+.right  { transform: rotateY(90deg) translateZ(75px); }
+.top    { transform: rotateX(90deg) translateZ(75px); }
+.bottom { transform: rotateX(-90deg) translateZ(75px); }
+
+
+img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    backface-visibility: hidden;
+    filter: blur(1px);
+}
+
+#bloom-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 360px;
+    height: 360px;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background: radial-gradient(circle, #0ff 0%, transparent 50%);
+    filter: blur(40px);
+    opacity: 0.5;
+    z-index: -1;
+}
+
+h1,h2{
+    color: #0ff;
+    font-weight: bold;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+           Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue",
+           sans-serif;
+}
+
+#greeting{
+    place-self: center;
+    transition: transform 0.5s linear;
+    padding-top: 30vh;
+}
+
+#prompt-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 30vh
+}
+
+#output{
+position: absolute;
+border-style: outset;
+border-width: 5px;
+border-color: #0ff;
+width: 25vw;
+height: 25vh;
+right: 500px;
+top: 50px;
+}
+
+#sidebar{
+    float: left;
+    background: rgb(0, 170, 170);
+    height: 100vh;
+    width: 25vw;
+    position: fixed;
+    left: 0;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease-in-out;
+}
+
+#sidebar.open {
+    transform: translateX(0);
+}
+
+#prompt{
+    border-radius: 5px;
+    width: 75vw;
+    height: 100px;
+    padding-bottom: 50px;
+    padding-left: 10px;
+}
+
+button{
+    position: absolute;
+    border-style: none;
+    background-color: rgb(99, 99, 99);
+    cursor: pointer;
+}
+
+
+
+
+
+
