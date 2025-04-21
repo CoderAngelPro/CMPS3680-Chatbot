@@ -11,7 +11,7 @@ const cohere = new CohereClientV2({ token: process.env.API_KEY});
 app.use(express.static('www'));
 app.set('trust proxy', true);
 
-app.get('/hello', (req, res) => {
+app.get('/server', (req, res) => {
   res.status(200)
     .type('text/plain')
     .send('HELLO WORLD');
