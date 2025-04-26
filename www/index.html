@@ -9,7 +9,7 @@
 </head>
 <body>
   <button id="sidebar-button">
-    <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 25 25" fill="none" stroke="#0ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
       <line x1="3" y1="12" x2="21" y2="12"></line>
       <line x1="3" y1="6" x2="21" y2="6"></line>
       <line x1="3" y1="18" x2="21" y2="18"></line>
@@ -32,11 +32,37 @@
     <div class="face top"></div>
     <div class="face bottom"></div>
   </div>
-<div id="output"></div>
+  <svg viewBox="0 0 300 240" xmlns="http://www.w3.org/2000/svg" id="chat-bubble">
+    <path
+      fill="#00baba"
+      d="M30,0 H270 A30,30 0 0 1 300,30 V170 A30,30 0 0 1 270,200 H120 L80,240 L80,200 H30 A30,30 0 0 1 0,170 V30 A30,30 0 0 1 30,0 Z"
+    />
+    <foreignObject x="15" y="10" width="280" height="180">
+    <div xmlns="http://www.w3.org/1999/xhtml" id="bubble-content">
+    </div>
+  </foreignObject>
+  </svg>
 <div id="prompt-container">
   <h2 id="prompt-helper"> How can I help?</h2>
+  <div class="input-wrapper">
     <input type="text" id="prompt" placeholder="Message FredBot">
-    <button type="button" id="submit" >Send</button>
+    <button type="button" id="submit">
+      <svg  width="40" height="40"
+      viewBox="0 0 24 24"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-label="Send / Upload">
+    <circle cx="12" cy="12" r="11" fill="#00baba"/>
+    <line  x1="12" y1="16" x2="12" y2="8"
+         stroke="white" stroke-width="2"
+         stroke-linecap="round"/>
+    <polyline points="8,12 12,8 16,12"
+            fill="none" stroke="white"
+            stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round"/>
+      </svg>
+    </button>
+    </div>
+    <button id="move-button">Move Cube</button>
 </div>
 <script src="script.js"></script>
 </body>
