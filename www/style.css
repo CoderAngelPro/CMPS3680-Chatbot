@@ -1,6 +1,5 @@
 * {
   padding: 0;
-  box-sizing: border-box;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
   Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue",
@@ -81,29 +80,32 @@ img {
     z-index: -1;
 }
 
-h1,h2{
+h1{
     color: #0ff;
     font-weight: bold;
-    font-size: 2rem;
-}
-
-#greeting{
+    font-size: 2.5rem;
     place-self: center;
-    transition: transform 0.5s ease-in-out;
     padding-top: 30vh;
 }
 
+h2{
+    color: #0ff;
+    font-weight: bold;
+    font-size: 2.2rem;
+    place-self: center;
+}
+
 #prompt-container{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-top: 30vh
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 30vh;
 }
 
 #chat-bubble{
   position: absolute;
   width: min(50vw, 500px);
-  height: min(40vh, 400px);
+  height: 40vh;
   visibility: hidden;
   z-index: 1;
   will-change: transform;
@@ -112,7 +114,7 @@ h1,h2{
 @media (max-width: 650px) {
   #chat-bubble {
     position: absolute;
-    width: 69vw;
+    width: 60vw;
     left: 70% !important;
   }
 }
@@ -120,18 +122,20 @@ h1,h2{
 @media (max-height: 750px) {
   #chat-bubble {
     position: absolute;
-    height: 40vh;
-    top: 25% !important;
+    height: 42vh;
+    top: 20% !important;
   }
 }
 
 
-
 #sidebar{
     float: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     background: rgb(0, 170, 170);
     height: 100vh;
-    width: 25vw;
+    width: clamp(150px, 30vw, 300px);
     position: fixed;
     left: 0;
     transform: translateX(-100%);
@@ -144,17 +148,15 @@ h1,h2{
 }
 
 #prompt{
+    position: relative;
+    margin-top: 10px;
     border-radius: 25px;
     width: 75vw;
-    height: 125px;
-    padding-bottom: 75px;
-    padding-left: 15px;
+    height: clamp(100px, 20vh, 150px);
     background-color: #555;
     max-width: 800px;
     color: white;
     cursor: text;
-    padding-right: 60px;
-    font-size: 1rem;
 }
 
 #sidebar-button{
@@ -172,64 +174,113 @@ h1,h2{
     color: white;
     overflow-y: auto;
     border-radius: 10px;
+    overflow-wrap: break-word;
 }
 
 ::-webkit-scrollbar {
-    width: 15px;
-  }
-  ::-webkit-scrollbar-track {
-    background: black;
-    border: 3px solid #00BABA;
-    border-radius: 5px;
-  }
-  ::-webkit-scrollbar-thumb {
-    background: #555;
-    border-radius: 5px;
-    border: 1px solid black;
-  }
-  ::-webkit-scrollbar-thumb:hover {
-    background: #888;
-  }
+  width: 15px;
+}
+::-webkit-scrollbar-track {
+  background: black;
+  border: 3px solid #00BABA;
+  border-radius: 5px;
+}
+::-webkit-scrollbar-thumb {
+  background: #555;
+  border-radius: 5px;
+  border: 1px solid black;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #888;
+}
 
   #submit {
     position: absolute;
-    bottom: 5px;
+    bottom: 6px;
     right: 10px;
     background: transparent;
     border: none;
     cursor: pointer;
   }
 
-input, button, fieldset {
+input, button, fieldset, textarea {
     border-style: none;
 }
 
 input:focus,
 button:focus,
-fieldset:focus {
+fieldset:focus,
+textarea:focus {
   outline: none;
 }
 
-.input-wrapper {
-  position: relative;
-  width: 75vw;
-  max-width: 800px;
-  margin-top: 10px;
+
+#prompt-text::placeholder {
+  color: rgb(150, 150, 150);
+  line-height: 1;
+  vertical-align: top;
 }
 
-#prompt::placeholder {
-  color: rgb(150, 150, 150)
-}
+   input[type="checkbox"]:checked + label {
+     background-color: #00baba;
+ }
 
-#move-button{
+   input[type="checkbox"] {
+     display: none;
+   }
+
+  label[for="analysis"], label[for="search"]{
+  border: 2px solid gray;
+  padding: 5px;
+  padding-left: 1px;
+  padding-right: 7px;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: clamp(1.1rem, 2vh, 1.5rem);
+  user-select: none; 
+  }
+
+  label[for="prompt-text"]{
+  border: none;
+  }
+
+  #UI{
+    display: flex;
     position: absolute;
     bottom: 10px;
-    left: 10px;
-    border: solid 2px rgb(70, 70, 70);
-    border-radius: 25px;
-    background-color: transparent;
-    cursor: pointer;
-    color: white;
-    font-size: 1rem;
-    padding: 5px 10px;
-}
+    justify-content: flex-start;
+    padding-left: 15px;
+    gap: 10px;
+    }
+
+    textarea{
+        position: absolute;   
+        width: 100%;
+        height: 65%;
+        background-color: transparent;
+        font-size: 1.3rem;
+        color: white;
+        padding-left: 15px;
+        padding-right: 10px;
+        padding-top: 20px;
+        line-height: 1;
+        resize: none; 
+        overflow-y: auto; 
+        white-space: pre-wrap; 
+        overflow-wrap: break-word;
+        text-rendering: optimizeLegibility;
+    }
+
+    #sidebar-header{
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    }
+
+    #close{
+      width: 50%;
+      height: auto;
+      cursor: pointer;
+    }
+   

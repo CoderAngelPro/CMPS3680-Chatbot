@@ -81,15 +81,34 @@ function glitchEffect() {
 
 animate();
 
-document.addEventListener('DOMContentLoaded', () => {
-  const promptInput = document.getElementById('prompt');
-  const submitButton = document.getElementById('submit');
-  const svgEL = document.getElementById('bubble-content');
+async function typeText(element, text, delay = 50) {
+  for (const char of text) {
+    element.textContent += char;
+    await new Promise(resolve => setTimeout(resolve, delay));
+  }
+}
 
-  const handleSubmit = async () => {
+document.addEventListener('DOMContentLoaded', () => {
+  const promptInput = document.getElementById('prompt-text');
+  const form = document.getElementById('prompt');
+  const svgEL = document.getElementById('bubble-content');
+  const text = document.getElementById('title');
+  const text2 = document.getElementById('prompt-helper');
+  
+
+  typeText(text, "Hello, I'm FredBot.");
+  
+  setTimeout(() => {
+  typeText(text2, "How can I help?");
+  }, 2000);
+
+  
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
       chatBubble.style.visibility = 'visible';
 
-      const prompt = promptInput.value;
+      const prompt = promptInput.value.trim();
       promptInput.value = '';
 
       if (!prompt) {
@@ -117,20 +136,24 @@ document.addEventListener('DOMContentLoaded', () => {
       }
   };
 
-
-  submitButton.addEventListener('click', handleSubmit);
   promptInput.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') {
-          e.preventDefault();
-          handleSubmit();
-          promptInput.value = '';
-      }
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      text.style.visibility = 'hidden';
+      form.requestSubmit(); 
+      
+    }
   });
+
+  form.addEventListener('submit', handleSubmit);
+  
 });
 
 document.getElementById('sidebar-button').addEventListener('click', () => {
   const sidebar = document.getElementById('sidebar');
+  const sidebar1 = document.getElementById('close');
   sidebar.classList.toggle('open');
+  sidebar1.classList.toggle('close');
 });
 
 document.getElementById('move-button').addEventListener('click', () => {

@@ -16,11 +16,18 @@
     </svg>
   </button>
   <div id="sidebar">
-      <img src="happy_robot.png" alt="FredBot Icon">
+    <div id="sidebar-header">
+      <p>FredBot</p>
+      <button id="close">
+      <img src="Close-sidebar2.png">
+      </button>
+    </div>
+    <div id="sidebar-container">
+    <p>Login to see your chat history</p>
+      <img src="happy_robot.png">
+    </div>
   </div>
-  <div id="greeting">
-    <h1>FredBot</h1>
-</div>
+    <h1 id="title"></h1>
 <div id="bloom-glow"></div>
 <div class="cube" id="cube">
     <div class="face front">
@@ -43,14 +50,19 @@
   </foreignObject>
   </svg>
   <div id="prompt-container">
-    <h2 id="prompt-helper"> How can I help?</h2>
-    <div class="input-wrapper">
-      <input type="text" id="prompt" placeholder="Message FredBot">
-      <button type="button" id="submit">
-        <svg  width="40" height="40"
+    <h2 id="prompt-helper"></h2>
+      <form id="prompt">
+        <label for="prompt-text"></label>
+        <textarea id="prompt-text" placeholder="Message FredBot"></textarea>
+        <div id="UI">
+          <input type="checkbox" id="analysis">
+          <label for="analysis">&#x1F9E0;Fred Analysis</label>
+          <input type="checkbox" id="search">
+          <label for="search">&#x1F50D;Fred Search</label>
+      </div>
+      <button type="submit" id="submit"> <svg  width="40" height="40"
         viewBox="0 0 24 24"
-        xmlns="http://www.w3.org/2000/svg"
-        aria-label="Send / Upload">
+        xmlns="http://www.w3.org/2000/svg">
       <circle cx="12" cy="12" r="11" fill="#00baba"/>
       <line  x1="12" y1="16" x2="12" y2="8"
            stroke="white" stroke-width="2"
@@ -61,9 +73,9 @@
               stroke-linejoin="round"/>
         </svg>
       </button>
-      <button type="button" id="move-button">FredAnalysis</button>
+      </form>
+      <button id="move-button"></button>
       </div>
-  </div>
 <script src="script.js"></script>
 </body>
 </html>
