@@ -151,9 +151,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
 document.getElementById('sidebar-button').addEventListener('click', () => {
   const sidebar = document.getElementById('sidebar');
-  const sidebar1 = document.getElementById('close');
   sidebar.classList.toggle('open');
-  sidebar1.classList.toggle('close');
+  
+});
+
+document.getElementById('close').addEventListener('click', () => {
+  const sidebar = document.getElementById('sidebar');
+  sidebar.classList.toggle('open');
 });
 
 document.getElementById('move-button').addEventListener('click', () => {

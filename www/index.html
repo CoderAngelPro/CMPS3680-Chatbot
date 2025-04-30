@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" href="happy_robot.png">
+  <link rel="icon" href="./img/happy_robot.png">
   <link rel="stylesheet" href="style.css">
   <title>FredBot</title>
 </head>
@@ -16,22 +16,44 @@
     </svg>
   </button>
   <div id="sidebar">
-    <div id="sidebar-header">
-      <p>FredBot</p>
       <button id="close">
-      <img src="Close-sidebar2.png">
+        <svg viewBox="-5 -5 110 110"
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        stroke-linecap="round"
+        stroke-linejoin="round">
+     <rect x="5"  y="5"  width="90" height="90" rx="20"
+           stroke="#00FFFF" stroke-width="11" fill="none"/>
+     <line x1="30" y1="15" x2="30" y2="85"
+           stroke="#00fefe" stroke-width="11"/>
+     <polyline points="65 35 50 50 65 65"
+               stroke="#00fefe" stroke-width="11"/>
+        </svg>
       </button>
-    </div>
     <div id="sidebar-container">
     <p>Login to see your chat history</p>
-      <img src="happy_robot.png">
+      <img src="./img/happy_robot.png">
     </div>
+        <a id="profile" href="login.html">
+        <svg viewBox="0 0 100 100"
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none">
+        
+     <circle cx="50" cy="50" r="50" fill="#00FFFF"/>
+     <circle cx="50" cy="35" r="20" fill="#555"/>
+     <path d="M20 75
+              c0-15 15-25 30-25
+              s30 10 30 25
+              v10 H20 Z"
+           fill="#555"/>
+        </svg>
+      </a>
   </div>
     <h1 id="title"></h1>
 <div id="bloom-glow"></div>
 <div class="cube" id="cube">
     <div class="face front">
-        <img src="happy_robot.png">
+        <img src="./img/happy_robot.png">
     </div>
     <div class="face back"></div>
     <div class="face left"></div>
@@ -60,7 +82,8 @@
           <input type="checkbox" id="search">
           <label for="search">&#x1F50D;Fred Search</label>
       </div>
-      <button type="submit" id="submit"> <svg  width="40" height="40"
+      <button type="submit" id="submit"> 
+        <svg  width="40" height="40"
         viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg">
       <circle cx="12" cy="12" r="11" fill="#00baba"/>
