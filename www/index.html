@@ -31,24 +31,36 @@
         </svg>
       </button>
     <div id="sidebar-container">
-    <p>Login to see your chat history</p>
-      <img src="./img/happy_robot.png">
+    <p id="loginmsg">Login to save your chat history</p>
+      <img id="loginimg" src="./img/happy_robot.png">
+      <a id="loginBtn" href="login.html">
+        <p>Login</p>
+      </a>
     </div>
-        <a id="profile" href="login.html">
-        <svg viewBox="0 0 100 100"
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none">
-        
+    <div id="profile">
+      <div id="Modal">
+        <div id="Modal-content">
+         <button class="modal-option">Settings</button>
+         <button class="modal-option">Contact Us</button>
+          <button class="modal-option" id="clearBtn">Clear History</button>
+         <button class="modal-option" id="logoutBtn">Log Out</button>
+        </div>
+      </div>
+      <svg viewBox="0 0 100 100"
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none" id="profile-svg">
      <circle cx="50" cy="50" r="50" fill="#00FFFF"/>
      <circle cx="50" cy="35" r="20" fill="#555"/>
      <path d="M20 75
-              c0-15 15-25 30-25
-              s30 10 30 25
-              v10 H20 Z"
-           fill="#555"/>
-        </svg>
-      </a>
+          c0-15 15-25 30-25
+          s30 10 30 25
+          v10 H20 Z"
+         fill="#555"/>
+      </svg>
+      <p >Profile</p>
+    </div>
   </div>
+  <div id="overlay"></div>
     <h1 id="title"></h1>
 <div id="bloom-glow"></div>
 <div class="cube" id="cube">
@@ -97,7 +109,6 @@
         </svg>
       </button>
       </form>
-      <button id="move-button"></button>
       </div>
 <script src="script.js"></script>
 </body>

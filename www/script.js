@@ -2,6 +2,7 @@ const cube = document.getElementById("cube");
 const bloomGlow = document.getElementById("bloom-glow");
 const chatBubble = document.getElementById("chat-bubble");
 
+
 let targetX = 0;
 let targetY = 0;
 let currentX = 0;
@@ -89,64 +90,93 @@ async function typeText(element, text, delay = 50) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+  const modal = document.getElementById("Modal");
+  const profile = document.getElementById("profile");
   const promptInput = document.getElementById('prompt-text');
-  const form = document.getElementById('prompt');
-  const svgEL = document.getElementById('bubble-content');
-  const text = document.getElementById('title');
-  const text2 = document.getElementById('prompt-helper');
-  
+  const form        = document.getElementById('prompt');
+  const svgEL       = document.getElementById('bubble-content');
+  const title       = document.getElementById('title');
+  const helperTxt   = document.getElementById('prompt-helper');
+  const content = document.getElementById('Modal-content');
 
-  typeText(text, "Hello, I'm FredBot.");
-  
-  setTimeout(() => {
-  typeText(text2, "How can I help?");
-  }, 2000);
+  profile.addEventListener("click", () => {
+    modal.style.display =
+      modal.style.display === 'block' ? 'none' : 'block';
+  });
 
-  
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-      chatBubble.style.visibility = 'visible';
-
-      const prompt = promptInput.value.trim();
-      promptInput.value = '';
-
-      if (!prompt) {
-          svgEL.textContent = 'Please enter a prompt.';
-          return;
-      }
-
-      svgEL.textContent = 'Thinking...';
-      
-      try {
-          const response = await fetch(`/generate?prompt=${encodeURIComponent(prompt)}`);
-          
-          if (!response.ok) {
-              const errorData = await response.json();
-              throw new Error(errorData.error || 'Request failed');
-          }
-
-          const data = await response.json();
-          const outputText = data.text?.message?.content?.[0]?.text;
-          svgEL.textContent = outputText || "Sorry, I couldn't generate a response.";
-
-      } catch (error) {
-          svgEL.textContent = error.message;
-          console.error('API Error:', error);
-      }
-  };
-
-  promptInput.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter' && !e.shiftKey) {
-      e.preventDefault();
-      text.style.visibility = 'hidden';
-      form.requestSubmit(); 
-      
+  document.addEventListener('click', e => {
+    if (!content.contains(e.target) && !profile.contains(e.target)) {
+      modal.style.display = 'none';
     }
   });
 
-  form.addEventListener('submit', handleSubmit);
+
   
+  typeText(title,  "Hello, I'm FredBot.");
+  setTimeout(() => typeText(helperTxt, "How can I help?"), 2000);
+
+  const token = localStorage.token;                      
+  const authH = token ? { Authorization:`Bearer ${token}` } : {};
+
+
+  if (token) {
+    document.getElementById('loginmsg').style.display = 'none';
+    document.getElementById('loginimg').style.height = '0px';
+    document.getElementById('loginBtn').style.display = 'none';
+    fetch('/history', { headers: authH })
+      .then(r => r.ok ? r.json() : [])
+      .then(history => history.forEach(m => {
+        addHistoryCard(m.prompt, m.reply);
+      }))
+      .catch(console.error);
+  }
+  if (!token) {
+    document.getElementById('clearBtn').style.display = 'none';
+    document.getElementById('logoutBtn').style.display = 'none';
+    document.getElementById('Modal').style.top = '-100px';
+  }
+
+  /* ---- submit prompt ---- */
+  async function handleSubmit (e) {
+    e.preventDefault();
+    chatBubble.style.visibility = 'visible';
+
+    const prompt = promptInput.value.trim();
+    promptInput.value = '';
+    if (!prompt) { 
+      svgEL.textContent = 'Please enter a prompt.'; 
+      return; 
+    }
+
+    svgEL.textContent = 'Thinking…';
+
+    try {
+      const res = await fetch(`/generate?prompt=${encodeURIComponent(prompt)}`,
+        { headers: authH }
+      );
+
+      if (!res.ok) {
+        const err = await res.json();
+        throw new Error(err.error || 'Rate limit reached');
+      }
+
+      const { text: reply } = await res.json();
+      svgEL.textContent = reply 
+      addHistoryCard(prompt, reply);
+    } catch (err) {
+      svgEL.textContent = err.message;
+      console.error('API Error:', err);
+    }
+  }
+
+  form.addEventListener('submit', handleSubmit);
+  promptInput.addEventListener('keydown', e => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      title.style.visibility = 'hidden';
+      form.requestSubmit();
+    }
+  });
 });
 
 document.getElementById('sidebar-button').addEventListener('click', () => {
@@ -160,7 +190,41 @@ document.getElementById('close').addEventListener('click', () => {
   sidebar.classList.toggle('open');
 });
 
-document.getElementById('move-button').addEventListener('click', () => {
+/*document.getElementById('emote').addEventListener('click', () => {
     targetTranslateX = targetTranslateX === 0 ? -20 : 0;
     bloomGlow.style.transform = `translate(-50%, -50%) translateX(${targetTranslateX}vw)`;
-});
+}); */
+
+// Daniel Add FredBot Emotes ASAP ^^^^
+
+
+function addHistoryCard (prompt, reply) {
+  const sidebar = document.getElementById('sidebar-container');
+  if (!sidebar) return;
+  const card = document.createElement('div');
+  card.className = 'history-card';
+  card.innerHTML = `<strong>${prompt}</strong><br>${reply}`;
+  sidebar.prepend(card);
+}
+
+document.getElementById('logoutBtn').onclick = () => {
+    localStorage.removeItem('token');
+    location.reload();
+  };
+
+document.getElementById('clearBtn').onclick = async () => {
+  if (!confirm('Erase your entire chat history?')) return;
+  const token = localStorage.token;
+  if (!token) return;                  
+
+  const res = await fetch('/history', {
+    method: 'DELETE',
+    headers: { Authorization: `Bearer ${token}` }
+  });
+
+  if (res.ok) {
+    document.getElementById('sidebar-container').textContent = '';
+  } else {
+    alert('Failed to clear history');
+  }
+};
