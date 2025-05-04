@@ -228,3 +228,8 @@ document.getElementById('clearBtn').onclick = async () => {
     alert('Failed to clear history');
   }
 };
+
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/sw.js')
+          .catch(console.error);
+};

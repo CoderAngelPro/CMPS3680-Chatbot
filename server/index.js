@@ -7,6 +7,7 @@ import './models/message.js';
 import { User } from './models/user.js';
 import { Message } from './models/message.js';
 import jwt from 'jsonwebtoken';
+import path from 'path';
 
 dotenv.config();
 
@@ -16,6 +17,7 @@ const cohere = new CohereClientV2({ token: process.env.API_KEY });
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.set('trust proxy', true);
 
 (async () => {
   try {
@@ -70,13 +72,17 @@ const optionalAuth = (req, _res, next) => {
   next();
 };
 
-
-app.use(express.static('www'));
-app.set('trust proxy', true);
-
 app.get('/server', (_req, res) =>
   res.type('text/plain').send('HELLO WORLD')
 );
+
+app.use(express.static('www', {
+  setHeaders: (res, filePath) => {
+    if (filePath.endsWith('.webmanifest')) {
+      res.setHeader('Content-Type', 'application/manifest+json');
+    }
+  }
+}));
 
 
 app.get('/generate', optionalAuth, async (req, res) => {
