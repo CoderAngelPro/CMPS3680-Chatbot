@@ -309,6 +309,14 @@ textarea:focus {
       background-color: transparent;
   }
 
+  .history-card p            { 
+    color: #0ff;
+  }
+
+  .history-card strong            { 
+    color: #0ff;
+  }
+
 
   .history-card            { 
     margin-bottom: 10px; 

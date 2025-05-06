@@ -241,7 +241,7 @@ function addHistoryCard (prompt, reply) {
   if (!sidebar) return;
   const card = document.createElement('div');
   card.className = 'history-card';
-  card.innerHTML = `<strong>${prompt}</strong><br>${reply}`;
+  card.innerHTML = `<strong>${prompt}</strong><br><p>${reply}</p>`;
   sidebar.prepend(card);
 }
 
