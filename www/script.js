@@ -136,7 +136,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('Modal').style.top = '-100px';
   }
 
-  /* ---- submit prompt ---- */
+
   async function handleSubmit (e) {
     e.preventDefault();
     chatBubble.style.visibility = 'visible';

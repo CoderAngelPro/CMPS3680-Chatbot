@@ -35,7 +35,6 @@ self.addEventListener('fetch', event => {
   event.respondWith(
     caches.match(request).then(
       cached => cached || fetch(request).then(resp => {
-        // lazy-update cache
         if (resp.status === 200 && request.method === 'GET') {
           const clone = resp.clone();
           caches.open(CACHE).then(c => c.put(request, clone));
