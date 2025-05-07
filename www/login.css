@@ -15,21 +15,15 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
   Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue",
   sans-serif;
-<<<<<<< HEAD
-
-=======
   background-image: linear-gradient(to bottom right, #00baba, #123638);
   background-repeat: no-repeat;
   background-attachment: fixed;
   color: var(--text-color);
->>>>>>> Fixed
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
   overflow: hidden;
-
-  background-color: #010e10;
 }
 
 .login-container {

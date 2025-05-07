@@ -3,7 +3,6 @@ const bloomGlow = document.getElementById("bloom-glow");
 const chatBubble = document.getElementById("chat-bubble");
 
 
-
 let targetX = 0;
 let targetY = 0;
 let currentX = 0;
@@ -56,67 +55,30 @@ function animate() {
 
 
 const img = document.querySelector(".face.front img");
-
-const faces = [
-  "happy.png",
-  "silly_happy.png",
-  "worried.png",
-  "sad.png",
-  "really_sad.png",
-  "angery.png"
-];
-
-function randomizeFace() {
-  const chosen = faces[Math.floor(Math.random() * faces.length)];
-  img.src = `./img/${chosen}`;
-}
-
-
 let glitchTimer = 0;
 let glitchDuration = 0;
-let originalSrc = img.src;
-let glitchSwapped = false;
 
 function glitchEffect() {
-  if (glitchTimer <= 0) {
-    if (Math.random() < 0.02) { // was 0.04
-      glitchTimer = Math.floor(Math.random() * 6) + 3;
-      glitchDuration = glitchTimer;
-
-      // 30% chance to temporarily swap face
-      if (Math.random() < 0.3 && !glitchSwapped) {
-        const temp = faces[Math.floor(Math.random() * faces.length)];
-        if (`./img/${temp}` !== originalSrc) {
-          img.src = `./img/${temp}`;
-          glitchSwapped = true;
+    if (glitchTimer <= 0) {
+        if (Math.random() < 0.02) { 
+            glitchTimer = Math.floor(Math.random() * 10) + 5; 
+            glitchDuration = glitchTimer;
+        } else {
+            img.style.transform = "translate(0, 0)";
+            img.style.filter = "blur(0px)";
+            return;
         }
-      }
-    } else {
-      img.style.transform = "translate(0, -10%) scale(1.5)";
-      img.style.filter = "blur(0px) contrast(100%)";
-      if (glitchSwapped) {
-        img.src = originalSrc;
-        glitchSwapped = false;
-      }
-      return;
     }
-  }
 
-  const shakeX = (Math.random() - 0.5) * 12; // more intense
-  const shakeY = (Math.random() - 0.5) * 12;
-  const scale = 1.4 + Math.random() * 0.3;
-  const blur = Math.random() < 0.5 ? "1.5px" : "0.7px";
-  const contrast = Math.random() < 0.5 ? "180%" : "120%";
+    const shakeX = (Math.random() - 0.5) * 4;
+    const shakeY = (Math.random() - 0.5) * 4;
+    const blur = Math.random() < 0.5 ? "1px" : "0.5px";
 
-  img.style.transform = `translate(${shakeX}px, calc(${shakeY}px - 10%)) scale(${scale})`;
-  img.style.filter = `blur(${blur}) contrast(${contrast})`;
+    img.style.transform = `translate(${shakeX}px, ${shakeY}px)`;
+    img.style.filter = `blur(${blur})`;
 
-  glitchTimer--;
+    glitchTimer--;
 }
-
-
-
-setInterval(randomizeFace, 3000); // change face every 6 seconds
 
 animate();
 
