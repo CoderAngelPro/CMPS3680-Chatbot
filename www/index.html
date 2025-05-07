@@ -32,6 +32,9 @@
                stroke="#00fefe" stroke-width="11"/>
         </svg>
       </button>
+
+    <!-- Scroll Sidebar-->
+  <div id="sidebar-scroll">
     <div id="sidebar-container">
     <p id="loginmsg">Login to save your chat history</p>
       <img id="loginimg" src="./img/happy_robot.png">
@@ -39,29 +42,37 @@
         <p>Login</p>
       </a>
     </div>
+  </div>
+
+
+    <!-- Profile and Modal now side by side -->
     <div id="profile">
-      <div id="Modal">
-        <div id="Modal-content">
-         <button class="modal-option">Settings</button>
-         <button class="modal-option">Contact Us</button>
-          <button class="modal-option" id="clearBtn">Clear History</button>
-         <button class="modal-option" id="logoutBtn">Log Out</button>
-        </div>
-      </div>
       <svg viewBox="0 0 100 100"
       xmlns="http://www.w3.org/2000/svg"
       fill="none" id="profile-svg">
      <circle cx="50" cy="50" r="50" fill="#00FFFF"/>
-     <circle cx="50" cy="35" r="20" fill="#555"/>
+     <circle cx="50" cy="35" r="20" fill="#123638"/>
      <path d="M20 75
           c0-15 15-25 30-25
           s30 10 30 25
           v10 H20 Z"
-         fill="#555"/>
+         fill="#123638"/>
       </svg>
-      <p >Profile</p>
+      <p>Profile</p>
+
+      <!-- Model herer-->
+      <div id="Modal">
+        <div id="Modal-content">
+         <button class="modal-option">Settings</button>
+         <a href="contact.html" class="modal-option">Contact Us</a>
+          <button class="modal-option" id="clearBtn">Clear History</button>
+         <button class="modal-option" id="logoutBtn">Log Out</button>
+        </div>
+      </div>
     </div>
   </div>
+
+
   <div id="overlay"></div>
     <h1 id="title"></h1>
 <div id="bloom-glow"></div>
@@ -81,8 +92,7 @@
       d="M30,0 H270 A30,30 0 0 1 300,30 V170 A30,30 0 0 1 270,200 H120 L80,240 L80,200 H30 A30,30 0 0 1 0,170 V30 A30,30 0 0 1 30,0 Z"
     />
     <foreignObject x="15" y="10" width="280" height="180">
-    <div xmlns="http://www.w3.org/1999/xhtml" id="bubble-content">
-    </div>
+    <div xmlns="http://www.w3.org/1999/xhtml" id="bubble-content"></div>
   </foreignObject>
   </svg>
   <div id="prompt-container">

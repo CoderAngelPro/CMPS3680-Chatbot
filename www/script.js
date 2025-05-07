@@ -200,10 +200,11 @@ document.getElementById('close').addEventListener('click', () => {
 
 function addHistoryCard (prompt, reply) {
   const sidebar = document.getElementById('sidebar-container');
-  if (!sidebar) return;
+  if (!sidebar) 
+  return;
   const card = document.createElement('div');
   card.className = 'history-card';
-  card.innerHTML = `<strong>${prompt}</strong><br>${reply}`;
+  card.innerHTML = `<strong>${prompt}</strong><br><span>${reply}</span>`;
   sidebar.prepend(card);
 }
 
@@ -224,6 +225,7 @@ document.getElementById('clearBtn').onclick = async () => {
 
   if (res.ok) {
     document.getElementById('sidebar-container').textContent = '';
+    location.reload();
   } else {
     alert('Failed to clear history');
   }
